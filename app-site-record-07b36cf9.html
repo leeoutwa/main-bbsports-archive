@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PG模拟器 — 日常查询与对照参考</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.7;
+      background: linear-gradient(165deg, #fde9df 0%, #f6d5c0 60%, #edbba5 100%);
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      color: #3a2c23;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .page-card {
+      background: #fffffffa;
+      backdrop-filter: blur(2px);
+      border-radius: 36px;
+      padding: 2.8rem 2.5rem;
+      box-shadow: 0 20px 40px -12px rgba(140, 80, 50, 0.25),
+                  0 6px 12px rgba(0,0,0,0.05);
+      transition: box-shadow 0.2s ease;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem 0.8rem;
+      }
+      .page-card {
+        padding: 2rem 1.5rem;
+        border-radius: 28px;
+      }
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 2.8rem;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #5e3c2b, #8f5e45);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      color: #6b4c3a;
+      background: #f1e4db;
+      display: inline-block;
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 400;
+    }
+
+    .tagline {
+      text-align: center;
+      font-size: 1.05rem;
+      color: #5d4034;
+      background: #fcf5f0;
+      padding: 1.1rem 1.8rem;
+      border-radius: 60px;
+      margin: 1.6rem 0 2.8rem;
+      border: 1px solid #ecd9ce;
+      box-shadow: inset 0 1px 2px #fff7f2;
+      line-height: 1.6;
+    }
+
+    .tagline a {
+      color: #9b5f3f;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 2px solid #e6bfab;
+      padding-bottom: 1px;
+    }
+
+    .tagline a:hover {
+      border-bottom-color: #9b5f3f;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 550;
+      margin: 2.2rem 0 1rem 0;
+      color: #4f362a;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .section-title:before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 26px;
+      background: linear-gradient(180deg, #c39174, #a97152);
+      border-radius: 6px;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+      margin: 1.8rem 0;
+    }
+
+    @media (max-width: 500px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .card-item {
+      background: #faf3ed;
+      border-radius: 24px;
+      padding: 1.4rem 1.5rem;
+      border: 1px solid #ead9ce;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .card-item h3 {
+      font-size: 1.1rem;
+      font-weight: 550;
+      margin-bottom: 0.3rem;
+      color: #4e362b;
+    }
+
+    .card-item p {
+      margin-bottom: 0.2rem;
+      font-size: 0.96rem;
+      color: #4e3b30;
+    }
+
+    .usage-note {
+      background: #f7ece6;
+      border-left: 8px solid #c49378;
+      border-radius: 24px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+    }
+
+    .usage-note strong {
+      color: #6a4232;
+    }
+
+    .faq-mini {
+      margin: 2rem 0 0.5rem;
+    }
+
+    .faq-mini dt {
+      font-weight: 550;
+      margin: 1.2rem 0 0.2rem;
+      color: #4f372b;
+      display: flex;
+      align-items: center;
+    }
+
+    .faq-mini dt:before {
+      content: "▸";
+      margin-right: 8px;
+      color: #b68162;
+      font-size: 1.1rem;
+    }
+
+    .faq-mini dd {
+      margin-left: 1rem;
+      color: #4d3c32;
+      font-size: 0.96rem;
+      border-left: 3px solid #ecd9ce;
+      padding-left: 1rem;
+    }
+
+    .btn-like-link {
+      display: inline-block;
+      background: #e3cfc1;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #3d2c21;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      border: 1px solid #d2b8a6;
+    }
+
+    .btn-like-link:hover {
+      background: #dac1b1;
+      transform: scale(1.02);
+    }
+
+    .footer-note {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #7f6658;
+      border-top: 1px solid #e6d6cb;
+      padding-top: 1.8rem;
+    }
+
+    .footer-note a {
+      color: #7f5b48;
+      text-decoration: none;
+      border-bottom: 1px dashed #c7ae9c;
+    }
+
+    .footer-note a:hover {
+      border-bottom-style: solid;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="page-card">
+
+    <div class="hero">
+      <h1>PG模拟器</h1>
+      <div class="sub">日常查询·对照·延伸阅读</div>
+    </div>
+
+    <div class="tagline">
+      无论是快速检索某个场景的模拟表现，还是逐项对照参数细节，这里都像一本反复翻阅的参考手册。<br>
+      你可以随时打开 <a href="https://app-site-pg.com">PG模拟器</a>，在简短浏览中找到你需要的部分。
+    </div>
+
+    <p style="font-size:1.02rem;">
+      平时做方案对比或验证思路时，手边有一份结构清晰、信息稳定的参考会省去很多反复翻找的麻烦。
+      也正是出于这种习惯，“PG模拟器”被设计成一个更适合日常查阅、对照和延伸阅读的资源位置。
+      它不追求花哨的交互，更在意把模拟相关的内容组织得干净、可读。
+    </p>
+
+    <div class="section-title">常见使用场景</div>
+    <div class="grid-2">
+      <div class="card-item">
+        <h3>快速对照</h3>
+        <p>把不同模拟参数或结果并列展示，适合随手核实数据、比较几个接近的选项，避免来回切换页面。</p>
+      </div>
+      <div class="card-item">
+        <h3>延伸阅读</h3>
+        <p>围绕核心内容补充背景说明、术语解释或注意事项，补全理解时容易遗漏的细节，辅助判断。</p>
+      </div>
+      <div class="card-item">
+        <h3>场景查询</h3>
+        <p>按功能或分类浏览模拟情景，不必每次都从头开始，适合有明确目标后快速定位。</p>
+      </div>
+      <div class="card-item">
+        <h3>简单记录</h3>
+        <p>页面结构偏平实，方便在浏览过程中顺手记录自己的对照结论或疑问，就像在参考书旁做笔记。</p>
+      </div>
+    </div>
+
+    <div class="usage-note">
+      <strong>🔄 使用建议：</strong> 建议先大致浏览整体分类，再按需进入具体条目。<br>
+      如果只需要确认某个细节，直接用页面内查找（Ctrl+F）能更快定位。<br>
+      遇到不熟悉的术语时，可以先看对应部分的说明段落，再决定是否需要进一步查找外部资料。
+    </div>
+
+    <div class="section-title">一些常见疑问</div>
+    <dl class="faq-mini">
+      <dt>页面内容会经常变动吗？</dt>
+      <dd>结构相对稳定，但说明部分会随模拟场景的更新做补充。建议每隔一段时间翻一翻，留意新增或调整的条目。</dd>
+      <dt>适合完全没经验的新手吗？</dt>
+      <dd>内容以场景和对照为主，不假设用户有深厚背景知识，但部分条目会涉及基础概念，可先阅读对应的小节说明。</dd>
+      <dt>可以在移动设备上浏览吗？</dt>
+      <dd>是的，页面针对手机和窄屏做了一些适配，卡片和文字会自适应，基本不影响对照阅读。</dd>
+      <dt>和平台其他页面有什么关联？</dt>
+      <dd>当前站点以模拟器为核心，这个页面更偏向静态的参考与说明，不依赖实时数据或账户系统。</dd>
+    </dl>
+
+    <p style="margin-top: 2rem;">
+      如果你习惯在查阅时保留一个固定的起点，不妨把 <a href="https://app-site-pg.com" style="font-weight:500; color:#8f5e45; text-decoration:none; border-bottom:2px solid #dbbcac;">PG模拟器</a> 加入书签。日常需要对照或延伸阅读时，它会是一个安静、随时可打开的参考页。
+    </p>
+
+    <div class="footer-note">
+      <span>内容定期复核 · 保持克制与清晰</span><br>
+      <span style="display:inline-block; margin-top:0.3rem;">
+        基于常见模拟场景整理 · 如有疏漏欢迎指正
+      </span>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
