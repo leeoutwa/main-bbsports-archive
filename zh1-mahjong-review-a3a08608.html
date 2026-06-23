@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>麻将胡了 · 资料索引与产品说明</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+      background: #f4f5f7;
+      color: #1e1e2a;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* 卡片通用设计 */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e5eb;
+      border-radius: 20px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+      padding: 2rem 2.2rem;
+      margin-bottom: 2rem;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    /* 头部 / hero */
+    .hero {
+      background: #ffffff;
+      border: 1px solid #dce0e8;
+      border-radius: 24px;
+      padding: 2.8rem 2.2rem;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #1b1b2b;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: #3d4053;
+      max-width: 68ch;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero .sub {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: #6b6f81;
+      background: #eef0f5;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      border: 1px solid #d6dbe5;
+    }
+
+    /* 小节标题 */
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 1.4rem;
+      border-bottom: 1px solid #eaeef3;
+      padding-bottom: 0.4rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.6rem;
+      font-weight: 550;
+      letter-spacing: -0.01em;
+      color: #1f2233;
+    }
+
+    .section-head span {
+      font-size: 0.9rem;
+      color: #7f8599;
+      background: #ecf0f5;
+      padding: 0 0.6rem;
+      border-radius: 16px;
+    }
+
+    /* 特点网格 */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.4rem;
+      margin-top: 0.6rem;
+    }
+
+    .feature-item {
+      background: #fafbfc;
+      border: 1px solid #e4e8ef;
+      border-radius: 16px;
+      padding: 1.2rem 1rem;
+      transition: background 0.15s;
+    }
+
+    .feature-item:hover {
+      background: #f2f5fa;
+    }
+
+    .feature-item strong {
+      display: block;
+      font-weight: 550;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+      color: #222538;
+    }
+
+    .feature-item p {
+      font-size: 0.95rem;
+      color: #4d5167;
+    }
+
+    /* 使用场景卡片内列表 */
+    .scene-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .scene-list li {
+      padding: 0.6rem 0 0.6rem 0.8rem;
+      border-left: 3px solid #cfd6e3;
+      margin-bottom: 0.6rem;
+      color: #2b2f42;
+    }
+
+    .scene-list li strong {
+      font-weight: 550;
+      color: #1f2337;
+    }
+
+    /* 提示 / 说明块 */
+    .tip-block {
+      background: #fafbfe;
+      border: 1px solid #dde2ec;
+      border-radius: 18px;
+      padding: 1.4rem 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .tip-block p {
+      margin-bottom: 0.6rem;
+    }
+
+    .inline-link {
+      color: #1f4682;
+      text-decoration: none;
+      border-bottom: 1px dotted #8f9eb9;
+      transition: border-color 0.15s;
+    }
+
+    .inline-link:hover {
+      border-bottom: 1px solid #1f4682;
+    }
+
+    /* faq 紧凑 */
+    .faq-item {
+      border-bottom: 1px solid #e6eaf2;
+      padding: 1rem 0;
+    }
+
+    .faq-item:last-of-type {
+      border-bottom: none;
+    }
+
+    .faq-item h4 {
+      font-weight: 540;
+      font-size: 1.05rem;
+      color: #1a1d30;
+      margin-bottom: 0.25rem;
+    }
+
+    .faq-item p {
+      font-size: 0.95rem;
+      color: #454a5e;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e0e4ed;
+      margin: 1.8rem 0 1rem 0;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #777c90;
+      font-size: 0.9rem;
+      padding: 1.2rem 0 0.4rem;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem 0.8rem; }
+      .hero { padding: 1.8rem 1.2rem; }
+      .hero h1 { font-size: 1.8rem; }
+      .card { padding: 1.6rem 1.2rem; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- hero 摘要 -->
+  <div class="hero">
+    <h1>麻将胡了 · 资料索引</h1>
+    <p>围绕「麻将胡了」整理的信息说明页，从规则常识、游戏结构到使用建议。以下内容基于公开资料与产品使用经验梳理，力求平实清晰。</p>
+    <div class="sub">📋 产品说明式 · 索引视角</div>
+  </div>
+
+  <!-- 第一部分：简要摘要 & 亮点 -->
+  <div class="card">
+    <div class="section-head">
+      <h2>摘要与亮点</h2>
+      <span>要点</span>
+    </div>
+    <p style="margin-bottom: 1rem;">「麻将胡了」是一类以传统麻将规则为基底、融合现代电子交互逻辑的休闲游戏产品。其核心体验围绕胡牌条件组合、节奏控制与短期策略判断展开，适合对麻将规则有基础了解或愿意快速上手的玩家。以下亮点来自多数版本共性：</p>
+    <div class="features-grid">
+      <div class="feature-item">
+        <strong>规则精炼</strong>
+        <p>保留国标 / 地方麻将核心胡牌型，去掉复杂番种，降低理解门槛。</p>
+      </div>
+      <div class="feature-item">
+        <strong>快速对局</strong>
+        <p>单局时长通常在3–8分钟，适合碎片时间投入。</p>
+      </div>
+      <div class="feature-item">
+        <strong>视觉简洁</strong>
+        <p>牌面、界面多用高对比配色，减少视觉干扰，便于信息聚焦。</p>
+      </div>
+      <div class="feature-item">
+        <strong>索引友好</strong>
+        <p>内置牌型说明与胡牌提示，可作为规则查询的辅助工具。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二部分：产品特点（更偏整理） -->
+  <div class="card">
+    <div class="section-head">
+      <h2>整理视角下的特点</h2>
+      <span>索引</span>
+    </div>
+    <p style="margin-bottom: 1.2rem;">从资料归类角度看，<a class="inline-link" href="https://zh1-mahjong.com">麻将胡了</a> 的产品结构主要包含以下可索引模块：</p>
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e9eef5;"><strong>· 牌面与组合库</strong> – 万、筒、条、字牌的标准组合方式，以及常见胡牌型（平胡、碰碰胡、七对等）。</li>
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e9eef5;"><strong>· 操作流程说明</strong> – 摸牌、打牌、碰、杠、听、胡的触发条件与反馈逻辑。</li>
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e9eef5;"><strong>· 计分规则摘要</strong> – 多数版本采用底分加番型倍率，具体数值可于产品内查阅。</li>
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e9eef5;"><strong>· 界面元素索引</strong> – 手牌区、弃牌区、操作按钮、提示区域的功能映射。</li>
+    </ul>
+  </div>
+
+  <!-- 第三部分：使用建议 + 场景 -->
+  <div class="card">
+    <div class="section-head">
+      <h2>使用建议与适用场景</h2>
+      <span>参考</span>
+    </div>
+    <p style="margin-bottom: 1rem;">以下建议基于一般用户反馈与产品逻辑归纳，不构成教学或保证：</p>
+    <ul class="scene-list">
+      <li><strong>规则学习辅助</strong> – 若对胡牌组合不熟悉，可先利用内置提示功能观察牌型变化，对比自身判断。</li>
+      <li><strong>短时娱乐</strong> – 通勤、等候等碎片时段可作为轻度休闲；单局时长可控，不建议连续长时间游戏。</li>
+      <li><strong>策略练习</strong> – 通过不同番型尝试，练习取舍与听牌选择；注意每次对局起始牌随机，结果波动属正常。</li>
+      <li><strong>资料对照</strong> – 如需系统学习麻将规则，建议配合地方麻将规则文档或标准竞赛规则使用。</li>
+    </ul>
+    <div class="tip-block">
+      <p>🔹 关于 <a class="inline-link" href="https://zh1-mahjong.com">麻将胡了</a> 的具体规则版本，产品内通常附有简要规则页。建议首次进入时花1–2分钟浏览，以便快速理解计分与特殊牌型定义。</p>
+      <p>🔹 部分版本允许自定义番型上限或开启辅助提示，可于设置页面调整。</p>
+    </div>
+  </div>
+
+  <!-- 第四部分：FAQ 摘要 & 可信说明 -->
+  <div class="card">
+    <div class="section-head">
+      <h2>常见问题摘要</h2>
+      <span>FAQ</span>
+    </div>
+    <div class="faq-item">
+      <h4>需要注册或付费才能使用吗？</h4>
+      <p>不同发布形式略有差异；多数版本可直接进行试玩或访客模式，部分增值功能（如统计、去广告）可能含可选付费。具体以产品内说明为准。</p>
+    </div>
+    <div class="faq-item">
+      <h4>游戏结果是否完全随机？</h4>
+      <p>牌局使用伪随机算法生成初始牌墙与摸牌顺序，符合常规电子棋牌实现。无法人为干预具体结果。</p>
+    </div>
+    <div class="faq-item">
+      <h4>是否有完整的规则文档？</h4>
+      <p>产品界面内一般包含「规则」或「帮助」入口，涵盖胡牌类型、番值表及操作说明。本页仅作摘要索引。</p>
+    </div>
+    <div style="margin-top: 1.2rem; background: #f0f3f9; border-radius: 14px; padding: 1rem 1.4rem;">
+      <p style="font-size: 0.95rem; color: #34384f;"><strong>可信说明</strong>：本页所有信息均基于公开产品体验与常见版本功能归纳，不包含个例承诺、胜率引导或隐蔽收费描述。请根据自身情况合理使用。</p>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <hr>
+  <div class="footer-note">
+    <span>资料整理 · 产品说明页 · 索引聚焦</span><br>
+    <span style="opacity: 0.6;">内容仅供信息参考，具体以实际产品为准</span>
+  </div>
+
+</div>
+</body>
+</html>
